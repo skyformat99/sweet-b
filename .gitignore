@@ -1,0 +1,7 @@
+.idea
+sweet_b
+*.o
+cmake-build-*
+build*
+callgrind.out.*
+*~
