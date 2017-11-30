@@ -42,7 +42,8 @@ from its authors](https://wearable.com/contact.html).
 ## Why is it called Sweet B?
 
 Sweet B is a pun on both the Short Weierstrass form of elliptic curves and on
-the NSA's [Suite B](https://en.wikipedia.org/wiki/NSA_Suite_B_Cryptography) set of cryptographic algorithms.
+the NSA's [Suite B](https://en.wikipedia.org/wiki/NSA_Suite_B_Cryptography) set
+of cryptographic algorithms.
 
 ## Where did Sweet B come from?
 
@@ -121,6 +122,13 @@ hashing and random number generation, see [`sb_sha256.h`](sb_sha256.h) and
 if you compile Sweet B with `-DSB_TEST`, you can run them using the main routine
 in [`sb_test.c`](sb_test.c).
 
+You can set the word size used in Sweet B with the `SB_MUL_SIZE` preprocessor
+macro. By default, this is set to 4, meaning that 32-bit multiplies producing
+64-bit results will be used. On 8- or 16-bit microcontrollers, or on 32-bit
+microcontrollers without full 64-bit multiply output (such as the Cortex-M0+),
+you should set this to 1 or 2. On 64-bit x86 systems, you may want to set the
+multiplication size to 8 to use 128-bit multiplication output.
+
 [CMake](https://cmake.org/) build support is provided; to use it, create a
 directory for your build, run `cmake` with the path to the Sweet B sources, and
 then run `make` to build. To run the unit tests with the clang undefined
@@ -195,9 +203,9 @@ follows:
 
 We could easily add additional criteria of our own choosing and decide that
 other curves are "unsafe". For instance, if avoidance of special cases is a
-concern, we could decide that primes `≡ 1 mod 4` are unsafe due to the extra
+concern, we could decide that primes ≡ 1 mod 4 are unsafe due to the extra
 (and irregular) step required in point decompression. Similarly, we could
-declare that curves with a cofactor `≠ 1` are unsafe due to the extra care
+declare that curves with a cofactor ≠ 1 are unsafe due to the extra care
 required in avoiding small-subgroup attacks. Neither of these criteria make
 these curves unsafe in practice, but they necessitate careful attention in the
 implementation and use of these curves, as is the case for all cryptographic
